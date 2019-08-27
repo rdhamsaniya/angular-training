@@ -1,0 +1,77 @@
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+
+    <label>
+        First Name:
+        <input type="text" formControlName="firstName">
+        <div *ngIf="profileForm.get('firstName').invalid && (profileForm.get('firstName').touched || profileForm.get('firstName').dirty)"
+            class="text-danger message-block">
+            <div *ngIf="profileForm.get('firstName').errors.required" class="error-message">
+                <small>Name is required.</small>
+            </div>
+            <div *ngIf="profileForm.get('firstName').errors.minlength" class="error-message">
+                <small>Min 3 charecter required</small>
+            </div>
+        </div>
+    </label>
+    <br>
+    <br>
+    <label>
+        Email:
+        <input type="text" formControlName="email">
+        <div *ngIf="profileForm.get('email').invalid && (profileForm.get('email').touched || profileForm.get('email').dirty)"
+            class="text-danger message-block">
+            <div *ngIf="profileForm.get('email').errors.required" class="error-message">
+                <small>Name is required.</small>
+            </div>
+            <div *ngIf="profileForm.get('email').errors.email" class="error-message">
+                <small>Invalid Email address</small>
+            </div>
+        </div>
+    </label>
+    <br>
+    <br>
+    <label>
+        Password:
+        <input type="text" formControlName="password">
+        <div *ngIf="profileForm.get('password').invalid && (profileForm.get('password').touched || profileForm.get('password').dirty)"
+            class="text-danger message-block">
+            <div *ngIf="profileForm.get('password').errors.required" class="error-message">
+                <small>Name is required.</small>
+            </div>
+            <div *ngIf="profileForm.get('password').errors.minlength" class="error-message">
+                <small>Min length is 8.</small>
+            </div>
+            <div *ngIf="profileForm.get('password').errors.pattern" class="error-message">
+                <small>Password must contain one upper case, one digit and one special characters</small>
+            </div>
+        </div>
+    </label>
+    <br>
+    <br>
+    <label>
+        Mobile No:
+        <input type="text" formControlName="mobileNo">
+        <div *ngIf="profileForm.get('mobileNo').invalid && (profileForm.get('mobileNo').touched || profileForm.get('mobileNo').dirty)"
+            class="text-danger message-block">
+            <div *ngIf="profileForm.get('mobileNo').errors.minlength" class="error-message">
+                <small>Only 10 number required</small>
+            </div>
+            <div *ngIf="profileForm.get('mobileNo').errors.maxlength" class="error-message">
+                <small>Only 10 number required</small>
+            </div>
+        </div>
+    </label>
+    <br>
+    <br>
+    <button type="submit" [disabled]="!profileForm.valid">Submit</button>
+</form>
+<br>
+<ng-container>
+    <div *ngIf="show">
+        <p>name : {{profileForm.get('firstName').value}}</p>
+        <p>Email : {{profileForm.get('email').value}}</p>
+        <p>Mobile No : {{profileForm.get('mobileNo').value}}</p>
+
+
+    </div>
+</ng-container>
