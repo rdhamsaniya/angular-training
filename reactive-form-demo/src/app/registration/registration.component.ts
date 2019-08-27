@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PasswordValidatorService } from "./password-validator.service";
 
 import { FormArray, FormControl, FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
@@ -22,7 +23,9 @@ export class RegistrationComponent implements OnInit {
   newControllers: any;
   show: boolean;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private passwordValidatorService: PasswordValidatorService) {
     this.profileForm = this.formBuilder.group({
       firstName: ['',
         [
@@ -40,7 +43,8 @@ export class RegistrationComponent implements OnInit {
         [
           Validators.required,
           Validators.minLength(8),
-          Validators.pattern(/^(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&])[A-Za-z0-9@$!%*?&]{8,}$/)
+          this.passwordValidatorService.passwordValidators()
+          
         ]
       ],
       mobileNo: ['',

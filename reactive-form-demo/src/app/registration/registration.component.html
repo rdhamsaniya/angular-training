@@ -41,7 +41,7 @@
             <div *ngIf="profileForm.get('password').errors.minlength" class="error-message">
                 <small>Min length is 8.</small>
             </div>
-            <div *ngIf="profileForm.get('password').errors.pattern" class="error-message">
+            <div *ngIf="profileForm.get('password').errors.reqPattern" class="error-message">
                 <small>Password must contain one upper case, one digit and one special characters</small>
             </div>
         </div>
