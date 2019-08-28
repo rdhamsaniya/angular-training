@@ -1,0 +1,29 @@
+#navbar{
+    text-align: right;
+    position: fixed;
+    top: 0;
+    background-color: #333;
+    color: #fff;
+    width: 100%;
+    position: sticky;
+}
+
+#navbar ul{
+    padding: 0;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    list-style: none;
+}
+
+#navbar li{
+    display: inline;
+}
+
+
+
+#navbar a{
+    color: #fff;
+    text-decoration: none;
+    font-size: 18 px;
+    padding-right: 15px;
+}

@@ -1,0 +1,18 @@
+#main-footer{
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 8px;
+    /* margin-top: 0px; */
+    border-top-color: red;
+    border-top-style: solid;
+    border-top-width: 2px;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}

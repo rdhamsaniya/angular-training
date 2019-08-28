@@ -1,0 +1,11 @@
+.accordion{
+    width: 30%; 
+    background-color: burlywood;
+}
+
+.accordion .accordion-group{
+    display: flex;
+    width: 30%;
+    justify-content: space-around;
+
+}
