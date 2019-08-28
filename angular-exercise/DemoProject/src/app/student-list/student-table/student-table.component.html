@@ -1,0 +1,84 @@
+<div class="containner">
+    <h1>List Of Students</h1>
+    <div class="topDiv">
+
+   <div class="searchBar">
+    <div class="input-group mb-3"  style="margin-top : 0px;">
+      <div class="input-group-prepend" >
+        <span class="input-group-text" id="basic-addon1">Search</span>
+      </div>
+  
+      <input class="form-control" type="text" name="search" placeholder="Enter student's Name, Mobile no, dob, City"
+        [(ngModel)]="filter">
+    </div>
+  </div>
+  </div>
+    <form [formGroup]="upForm" novalidate>
+      <table>
+        <tr>
+          <th (click)="sort('name')">Name
+            <span class="glyphicon sort-icon" *ngIf="id =='name'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+          </th>
+          <th (click)="sort('mobile')">Mobile No .
+            <span class="glyphicon sort-icon" *ngIf="id =='mobile'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+          </th>
+          <th (click)="sort('dob')">D.O.B.
+            <span class="glyphicon sort-icon" *ngIf="id =='dob'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+          </th>
+          <th (click)="sort('city')">City
+            <span class="glyphicon sort-icon" *ngIf="id =='city'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+          </th>
+          <th>Action</th>
+        </tr>
+        <tr *ngFor="let student of students | orderBy: id : reverse | filter:filter|paginate: { itemsPerPage: 7, currentPage: p } ; let i = index"
+          [attr.data-index]="i">
+          <td *ngIf="student.id != updateId ">{{student.name}}</td>
+          <td *ngIf="student.id != updateId ">{{student.mobile}}</td>
+          <td *ngIf="student.id != updateId ">{{student.dob}}</td>
+          <td *ngIf="student.id != updateId ">{{student.city}}</td>
+  
+          <td *ngIf="student.id == updateId && upForm!= undefined">
+            <input type="text" class="form-control" formControlName="name" [value]="student.name" [ngClass]="{'redTurn':upForm.controls['name'].invalid }">
+          </td>
+  
+          <td *ngIf="student.id == updateId && upForm != undefined"><input type="text" class="form-control"
+              formControlName="mobile" [value]="student.mobile" [ngClass]="{'redTurn':upForm.controls['mobile'].invalid }"></td>
+  
+  
+          <td *ngIf="student.id == updateId && upForm != undefined"><input type="text" class="form-control"
+              formControlName="dob" [value]=" updateDOBDefault | date : 'yyyy-MM-dd'"></td>
+  
+          <td *ngIf="student.id == updateId && upForm != undefined"><input type="text" class="form-control"
+              formControlName="city" [value]="student.city" [ngClass]="{'redTurn':upForm.controls['city'].invalid }"></td>
+          <td>
+            <div class="btncontainer">
+              <button class="del" type="button" (click)="setDeleteIndex(student.id,student.name)" [hidden]="student.id == updateId"
+                style="padding:0; border: transparent ; background-color: transparent;outline: none; cursor: pointer;"
+                name="del" data-toggle="modal" data-target="#exampleModalCenter">
+                <i class="fa fa-trash fa-lg" [ngStyle]="{'color': student.id == updateId ? '#ff8080':  'brown' }"></i>
+              </button>
+              <button mat-icon-button (click)="cancel()" type="button" *ngIf="student.id == updateId" style="padding:0; border: transparent ; background-color: transparent;outline: none; cursor: pointer;"
+                name="cancel">
+                <i class="fa fa-times fa-lg" style="color : red"></i>
+              </button>
+
+              <button mat-icon-button (click)="update(student.name,student.mobile,student.dob,student.city,i,student.id)" type="button"
+                color="primary" style="padding:0; border: transparent ; background-color: transparent ; outline: none;cursor: pointer;margin-left: 15px"
+                name="upt" [disabled]="upForm != undefined && ( !upForm.valid  ) && student.id == updateId ">
+                <i [ngClass]="{'fas fa-save fa-lg': student.id == updateId, 'fa fa-pencil fa-lg' : true }" [ngStyle]="{'color': student.id == updateId ? (!upForm.valid) ? '#ccffcc' : 'green' :  '#198dd4' }">
+  
+                </i>
+              </button>
+
+            </div>
+          </td>
+
+        </tr>
+      </table>
+    </form>
+  
+    <div *ngIf="!fullLoaded" class="loadMore">
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+    </div>
+  </div>
